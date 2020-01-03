@@ -1,7 +1,6 @@
 package com.nestia.biometriclib;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.hardware.biometrics.BiometricPrompt;
 import android.os.Build;
@@ -11,8 +10,9 @@ import android.security.keystore.KeyProperties;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
-import android.text.TextUtils;
 import android.util.Base64;
+import android.util.Log;
+import android.widget.Toast;
 
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
@@ -72,7 +72,9 @@ public class BiometricPromptApi28 implements IBiometricPromptImpl {
 
             mSignature = initSignature(KEY_NAME);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            // throw new RuntimeException(e);
+            Log.e(KEY_NAME,e.getMessage());
+            Toast.makeText(activity,"错误原因："+e.getMessage(),Toast.LENGTH_LONG).show();
         }
     }
 

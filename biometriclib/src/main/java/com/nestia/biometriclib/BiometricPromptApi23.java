@@ -1,18 +1,13 @@
 package com.nestia.biometriclib;
 
 import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Build;
 import android.os.CancellationSignal;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
-import android.support.annotation.RequiresPermission;
-import android.text.TextUtils;
 import android.util.Log;
 
 /**
@@ -32,7 +27,6 @@ public class BiometricPromptApi23 implements IBiometricPromptImpl {
 
     public BiometricPromptApi23(Activity activity) {
         mActivity = activity;
-
         mFingerprintManager = getFingerprintManager(activity);
     }
 

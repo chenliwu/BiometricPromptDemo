@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView mTextView;
     private Button mButton;
     private BiometricPromptManager mManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,13 +25,13 @@ public class MainActivity extends AppCompatActivity {
 
         mManager = BiometricPromptManager.from(this);
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("SDK version is "+ Build.VERSION.SDK_INT);
+        stringBuilder.append("SDK version is " + Build.VERSION.SDK_INT);
         stringBuilder.append("\n");
-        stringBuilder.append("isHardwareDetected : "+mManager.isHardwareDetected());
+        stringBuilder.append("isHardwareDetected : " + mManager.isHardwareDetected());
         stringBuilder.append("\n");
-        stringBuilder.append("hasEnrolledFingerprints : "+mManager.hasEnrolledFingerprints());
+        stringBuilder.append("hasEnrolledFingerprints : " + mManager.hasEnrolledFingerprints());
         stringBuilder.append("\n");
-        stringBuilder.append("isKeyguardSecure : "+mManager.isKeyguardSecure());
+        stringBuilder.append("isKeyguardSecure : " + mManager.isKeyguardSecure());
         stringBuilder.append("\n");
 
         mTextView.setText(stringBuilder.toString());
@@ -38,7 +39,9 @@ public class MainActivity extends AppCompatActivity {
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // 判断是否生物识别接口是否可用
                 if (mManager.isBiometricPromptEnable()) {
+                    // 调用识别接口
                     mManager.authenticate(new BiometricPromptManager.OnBiometricIdentifyCallback() {
                         @Override
                         public void onUsePassword() {
@@ -69,6 +72,8 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(MainActivity.this, "onCancel", Toast.LENGTH_SHORT).show();
                         }
                     });
+                } else {
+                    Toast.makeText(MainActivity.this, "设备不支持生物识别！", Toast.LENGTH_LONG).show();
                 }
             }
         });

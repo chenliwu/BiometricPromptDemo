@@ -45,10 +45,20 @@ public class BiometricPromptManager {
         }
     }
 
+    /**
+     * 判断手机SDK版本是否大于28
+     *
+     * @return
+     */
     private boolean isAboveApi28() {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.P;
     }
 
+    /**
+     * 判断手机SDK版本是否大于23
+     *
+     * @return
+     */
     private boolean isAboveApi23() {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M;
     }
@@ -73,7 +83,7 @@ public class BiometricPromptManager {
             final FingerprintManager manager = mActivity.getSystemService(FingerprintManager.class);
             return manager != null && manager.hasEnrolledFingerprints();
         } else if (isAboveApi23()) {
-            return ((BiometricPromptApi23)mImpl).hasEnrolledFingerprints();
+            return ((BiometricPromptApi23) mImpl).hasEnrolledFingerprints();
         } else {
             return false;
         }
@@ -90,7 +100,7 @@ public class BiometricPromptManager {
             final FingerprintManager fm = mActivity.getSystemService(FingerprintManager.class);
             return fm != null && fm.isHardwareDetected();
         } else if (isAboveApi23()) {
-            return ((BiometricPromptApi23)mImpl).isHardwareDetected();
+            return ((BiometricPromptApi23) mImpl).isHardwareDetected();
         } else {
             return false;
         }
